@@ -1,4 +1,4 @@
-from Model import Model
+from Model import Model, PredictionError
 import logging
 
 logger = logging.getLogger('infer')
@@ -16,11 +16,14 @@ def get_prediction(model_id, X):
     try:
         model_object = req_model.get_model_object()
         prediction = model_object.predict(X)
+    except PredictionError as pe:
+        raise pe
     except Exception as e:
         raise PredictionError(f'Prediction failed with error: {str(e)}. Example usage: {req_model.usage_example}')
     logger.debug(f'predicted: {prediction}')
     return prediction
 
 
-class PredictionError(Exception):
-    pass
+def register_model(model_id, model_lib, model_type, usage_example):
+    if model_id not in models:
+        models[model_id] = Model(model_id, model_lib=model_lib, model_type=model_type, usage_example=usage_example)

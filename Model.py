@@ -24,5 +24,10 @@ class Model:
             if os.path.isfile(self.path):
                 self.model_object = joblib.load(self.path)
             else:
-                logger.error(f'Failed to load model from path {self.path}')
+                logger.error(f'Failed to load model_id {self.model_id} from path {self.path}')
+                raise PredictionError(f'Failed to load model_id {self.model_id} from path {self.path}')
         return self.model_object
+
+
+class PredictionError(Exception):
+    pass

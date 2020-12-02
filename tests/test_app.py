@@ -6,6 +6,8 @@ from sklearn import svm
 from sklearn import datasets
 import joblib
 
+from inference import register_model
+
 model_id = 'iris_svm_v1'
 
 
@@ -103,13 +105,13 @@ def test_infer_missing_inputs(client):
     assert 'model_inputs' in text_response
 
 
-@pytest.mark.skip(reason="cannot be tested in parallel with other tests as file is created by others")
+#@pytest.mark.skip(reason="cannot be tested in parallel with other tests as file is created by others")
 def test_infer_missing_model(client):
-    filepath = f'models/{model_id}.pkl'
-    os.remove(filepath)
-    res = client.get(f'/infer?model_id={model_id}&model_inputs=[[1,2,3,4],[1,1,1,1]]')
+    new_model_id='iris_svm_v2'
+    register_model(model_id=new_model_id, model_lib='sklearn', model_type='svm',
+                   usage_example="/infer?model_id=iris_svm_v1&model_inputs=[[1,2,3,4],[4,3,2,1]] ")
+    res = client.get(f'/infer?model_id={new_model_id}&model_inputs=[[1,2,3,4],[1,1,1,1]]')
     assert res.status_code == 400
     text_response = res.get_data(as_text=True)
     assert len(text_response) > 0
     assert 'path' in text_response
-    model()
