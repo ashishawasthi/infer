@@ -11,7 +11,9 @@ pip install -r requirements.txt
 ```
 ### Test
 ```cmd
-python -m pytest 
+python -m pytest
+coverage run -m pytest
+coverage report -m
 ```
 ### Run
 ```cmd

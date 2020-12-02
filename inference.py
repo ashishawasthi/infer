@@ -8,6 +8,7 @@ models = {
     'iris_svm_v1': Model(model_id='iris_svm_v1', model_lib='sklearn', model_type='svm',
                          usage_example="/infer?model_id=iris_svm_v1&model_inputs=[[1,2,3,4],[4,3,2,1]] ")}
 
+
 def get_prediction(model_id, X):
     if model_id not in models:
         raise PredictionError(f'Requested model_id {model_id} is not registered')

@@ -1,6 +1,6 @@
 from flask import Flask
 from flask import request
-from infer import get_prediction, PredictionError
+from inference import get_prediction, PredictionError
 import json
 import logging
 

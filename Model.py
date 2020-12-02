@@ -10,9 +10,11 @@ class Model:
 
     def __init__(self, model_id, model_lib=None, model_type=None, path=None, usage_example=None):
         self.model_id = model_id
+        self.model_lib = model_lib
+        self.model_type = model_type
         self.path = path
         self.usage_example = usage_example
-        # Set a default path to local disk, if not provided by the application config
+        # Set a default path to local models directory, if no path provided by the application config
         if self.path is None:
             self.path = 'models/' + model_id + '.pkl'
 
@@ -22,5 +24,5 @@ class Model:
             if os.path.isfile(self.path):
                 self.model_object = joblib.load(self.path)
             else:
-                logger.error(f'Failed to load model from file {self.path}')
+                logger.error(f'Failed to load model from path {self.path}')
         return self.model_object
