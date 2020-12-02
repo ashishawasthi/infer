@@ -39,6 +39,7 @@ def test_index(client):
 def test_infer_one_inference(client, model):
     res = client.get(f'/infer?model_id={model}&model_inputs=[[1,2,3,4]]')
     assert res.status_code == 200
+    assert res.mimetype == 'application/json'
     json_response = json.loads(res.get_data(as_text=True))
     assert type(json_response) is list
     assert len(json_response) == 1
@@ -47,6 +48,7 @@ def test_infer_one_inference(client, model):
 def test_infer_two_inferences(client, model):
     res = client.get(f'/infer?model_id={model}&model_inputs=[[1,2,3,4],[1,1,1,1]]')
     assert res.status_code == 200
+    assert res.mimetype == 'application/json'
     json_response = json.loads(res.get_data(as_text=True))
     assert type(json_response) is list
     assert len(json_response) == 2
@@ -55,6 +57,7 @@ def test_infer_two_inferences(client, model):
 def test_infer_default_model_id(client):
     res = client.get(f'/infer?model_inputs=[[1,2,3,4],[1,1,1,1]]')
     assert res.status_code == 200
+    assert res.mimetype == 'application/json'
     json_response = json.loads(res.get_data(as_text=True))
     assert type(json_response) is list
     assert len(json_response) == 2
