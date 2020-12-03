@@ -19,4 +19,6 @@ coverage report -m
 ```cmd
 flask run
 ```
+### Try
+<flask_url>/infer/?model_id=iris_svm_v1&model_inputs=[[1,2,3,4],[1,1,1,1]]
 
