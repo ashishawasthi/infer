@@ -6,7 +6,10 @@ logger = logging.getLogger('infer')
 # TODO Load from your model registry system, remove hard-coding here
 models = {
     'iris_svm_v1': Model(model_id='iris_svm_v1', model_lib='sklearn', model_type='svm',
-                         usage_example="/infer?model_id=iris_svm_v1&model_inputs=[[1,2,3,4],[4,3,2,1]] ")}
+                         usage_example="/infer?model_id=iris_svm_v1&model_inputs=[[1,2,3,4],[4,3,2,1]] "),
+    'ann_v1': Model(model_id='ann_v1', model_lib='tensorflow', model_type='ann', path='models/ann_v1.h5',
+                        usage_example='/infer?model_id=ann_v1&model_inputs=[[1,2,3,4],[4,3,2,1]]')
+    }
 
 
 def get_prediction(model_id, X):
