@@ -5,6 +5,7 @@ from Model import PredictionError
 from inference import get_prediction
 import json
 import logging
+import os
 
 logger = logging.getLogger('app')
 
@@ -48,4 +49,4 @@ def infer():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True, host=os.environ.get("HOST", "0.0.0.0"), port=int(os.environ.get("PORT", 8080)))
