@@ -21,11 +21,14 @@ coverage report -m
 flask run
 ```
 ### Try
+```
 <flask_url>/infer?model_id=iris_svm_v1&model_inputs=[[1,2,3,4],[1,1,1,1]]
+```
 
 # Deloy Docker Image
 ```cmd
-docker build
+docker build  -t infer .
+docker run -it infer
 ```
 
 # Deloy on Google Cloud Run
@@ -33,3 +36,6 @@ docker build
 gcloud builds submit --tag gcr.io/<project-id>/infer
 gcloud run deploy --image gcr.io/<project-id>/infer
 ```
+### Deployed at
+https://infer-vz7lve6tka-as.a.run.app/infer?model_id=iris_svm_v1&model_inputs=[[1,2,3,4],[1,1,1,1]] 
+
